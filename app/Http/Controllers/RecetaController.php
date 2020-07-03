@@ -26,6 +26,6 @@ class RecetaController extends Controller
             ->with('categorias', $categorias);
 
 
-        // return view('recetas.index', compact('recetas'));
+        // return view('recetas.index', compact('recetas', 'categorias'));
     }
 }
