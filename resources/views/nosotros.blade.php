@@ -1,1 +1,0 @@
-<h1>Desde nosotros.blade.php</h1>
