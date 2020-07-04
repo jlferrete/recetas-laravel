@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.3/trix.min.css" integrity="sha512-sC2S9lQxuqpjeJeom8VeDu/jUJrVfJM7pJJVuH9bqrZZYqGe7VhTASUb3doXVk6WtjD0O4DTS+xBx2Zpr1vRvg==" crossorigin="anonymous" />
+@endsection
+
 @section('botones')
 
 <a href="{{ route('recetas.index') }}"class="btn btn-primary mr-2 text-white">Volver</a>
@@ -60,6 +64,32 @@
 
                 </div>
 
+                <div class="form-group mt-3">
+                    <label for="preparacion">Preparación</label>
+                    <input type="hidden" name="preparacion" id="preparacion" value="{{ old('preparacion') }}">
+                    <trix-editor 
+                        class="form-control @error('preparacion') is-invalid @enderror"
+                        input="preparacion"></trix-editor>
+                    @error('preparacion')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{$message}}</strong>
+                        </span>               
+                    @enderror
+                </div>
+                
+                <div class="form-group mt-3">
+                    <label for="ingredientes">Ingredientes</label>
+                    <input type="hidden" name="ingredientes" id="ingredientes" value="{{ old('ingredientes') }}">
+                    <trix-editor
+                        class="form-control @error('ingredientes') is-invalid @enderror" 
+                        input="ingredientes"></trix-editor>
+                    @error('ingredientes')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{$message}}</strong>
+                        </span>               
+                    @enderror
+                </div>
+
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="Agregar Receta">
                 </div>
@@ -68,6 +98,8 @@
         </div>
     </div>
 
- 
+@endsection
 
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.3/trix.min.js" integrity="sha512-NbOGGQbYcLSXiUfXtAgJry0RVLJINgm0f5nYcjfc/peKfDqxSc8bIXBEKpbty7DC/IWykVLpgeEgm7ijRa1cMw==" crossorigin="anonymous"></script>
 @endsection
