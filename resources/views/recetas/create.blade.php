@@ -31,8 +31,23 @@
                         <strong>{{$message}}</strong>
                         </span>
                     @enderror
+                </div>
 
+                <div class="form-group">
+                    <label for="categorias">Categorías</label>
 
+                    <select 
+                        name="categoria" 
+                        class="form-control"
+                        id="categoria"
+                    >
+                        @foreach($categorias as $id => $categoria)
+                        
+                            <option value="{{ $id }}">{{ $categoria }}</option>
+                            
+                        @endforeach
+                    
+                    </select>
                 </div>
 
                 <div class="form-group">
