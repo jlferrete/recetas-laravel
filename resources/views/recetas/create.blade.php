@@ -116,5 +116,5 @@
 @endsection
 
 @section('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.3/trix.min.js" integrity="sha512-NbOGGQbYcLSXiUfXtAgJry0RVLJINgm0f5nYcjfc/peKfDqxSc8bIXBEKpbty7DC/IWykVLpgeEgm7ijRa1cMw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.3/trix.min.js" integrity="sha512-NbOGGQbYcLSXiUfXtAgJry0RVLJINgm0f5nYcjfc/peKfDqxSc8bIXBEKpbty7DC/IWykVLpgeEgm7ijRa1cMw==" crossorigin="anonymous" defer></script>
 @endsection
