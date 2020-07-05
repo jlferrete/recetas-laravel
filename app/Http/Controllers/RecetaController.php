@@ -75,7 +75,7 @@ class RecetaController extends Controller
         // dd(public_path("storage/{$ruta_imagen}"));
 
         //resize de la imagen
-        $img = Image::make(public_path("storage/{$ruta_imagen}"))->fit(1200, 550);
+        $img = Image::make(public_path("storage/{$ruta_imagen}"))->fit(1000, 550);
         $img->save();
 
         //almacenar en la BD (sin modelo)
@@ -134,7 +134,43 @@ class RecetaController extends Controller
      */
     public function update(Request $request, Receta $receta)
     {
-        return "editando...";
+
+        // validacion
+        $data = request()->validate([
+            'titulo'        => 'required|min:6',
+            'categoria'     => 'required',
+            'preparacion'   => 'required',
+            'ingredientes'  => 'required',
+
+        ]);
+
+        //Asignar los valores
+        $receta->titulo = $data['titulo'];
+        $receta->categoria_id = $data['categoria'];
+        $receta->preparacion = $data['preparacion'];
+        $receta->ingredientes = $data['ingredientes'];
+
+
+        //Si el usuario sube una nueva imagen
+
+        if (request('imagen')) {
+            //obtener ruta de la imagen
+            $ruta_imagen = $request['imagen']->store('upload-recetas', 'public');
+
+            // dd(public_path("storage/{$ruta_imagen}"));
+
+            //resize de la imagen
+            $img = Image::make(public_path("storage/{$ruta_imagen}"))->fit(1000, 550);
+            $img->save();
+
+            //asignar al objeto
+            $receta->imagen = $ruta_imagen;
+        }
+
+        $receta->save();
+
+        //redireccionar
+        return redirect()->action('RecetaController@index');
     }
 
     /**
