@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CategoriaReceta;
 use App\Receta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -42,8 +43,11 @@ class RecetaController extends Controller
 
         //DB::table('categoria_receta')->get()->pluck('nombre', 'id')->dd();
 
-        $categorias = DB::table('categoria_receta')->get()->pluck('nombre', 'id');
+        //Obtener categoria sin modelo
+        // $categorias = DB::table('categoria_recetas')->get()->pluck('nombre', 'id');
 
+        //obtener categoria con modelo
+        $categorias = CategoriaReceta::all('id', 'nombre');
 
         return view('recetas.create')->with('categorias', $categorias);
     }
