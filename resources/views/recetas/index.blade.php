@@ -30,7 +30,7 @@
                     <td>
                         <a href="" class="btn btn-danger">Ellminar</a>
                         <a href="" class="btn btn-dark">Editar</a>
-                        <a href="" class="btn btn-success">Ver</a>
+                    <a href="{{ route('recetas.show', ['receta' => $receta->id]) }}" class="btn btn-success">Ver</a>
                     </td>
                 </tr>
 
