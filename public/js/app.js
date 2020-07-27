@@ -1915,10 +1915,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['recetaId'],
-  mounted: function mounted() {
-    console.log('receta actual', this.recetaId);
+  methods: {
+    eliminarReceta: function eliminarReceta() {
+      console.log('diste click', this.recetaId);
+    }
   }
 });
 
@@ -58685,7 +58689,8 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("input", {
     staticClass: "btn btn-danger mr-1 d-block w-100 mb-2",
-    attrs: { type: "submit", value: "Eliminar ×" }
+    attrs: { type: "submit", value: "Eliminar ×" },
+    on: { click: _vm.eliminarReceta }
   })
 }
 var staticRenderFns = []
