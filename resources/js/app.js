@@ -23,6 +23,7 @@ window.Vue = require('vue');
 
 Vue.config.ignoredElements = ['trix-editor', 'trix-toolbar'];
 Vue.component('fecha-receta', require('./components/FechaReceta.vue').default);
+Vue.component('eliminar-receta', require('./components/EliminarReceta.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

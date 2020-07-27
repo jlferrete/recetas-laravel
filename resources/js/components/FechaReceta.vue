@@ -1,8 +1,8 @@
-<<template>
+<template>
     <span>{{ formatearFecha }}</span>
 </template>
 
-<<script>
+<script>
     export default {
         props: ['fecha'],
         computed: {
