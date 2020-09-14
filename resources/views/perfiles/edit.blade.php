@@ -20,8 +20,13 @@
     <div class="row justify-content-center mt-5">
         <div class="col-md-10 bg-white p-3">
             <form 
-                action=""
+                action="{{ route('perfiles.update', ['perfil' => $perfil->id] ) }}"
+                method="POST"
+                enctype="multipart/form-data"
             >
+
+                @csrf
+                @method('PUT')
 
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
@@ -30,7 +35,7 @@
                         class="form-control @error('nombre') is-invalid @enderror"
                         id="nombre"
                         placeholder="Tu nombre"
-                        {{-- value="{{ $receta->nombre}}" --}}
+                        value="{{ $perfil->usuario->name }}"
                     >
 
                     @error('nombre')
@@ -47,7 +52,7 @@
                         class="form-control @error('url') is-invalid @enderror"
                         id="url"
                         placeholder="Tu sitio web"
-                        {{-- value="{{ $receta->url}}" --}}
+                        value="{{ $perfil->usuario->url }}"
                     >
 
                     @error('url')
@@ -59,7 +64,7 @@
 
                 <div class="form-group mt-3">
                     <label for="biografia">Biografía</label>
-                    <input type="hidden" name="biografia" id="biografia">
+                    <input type="hidden" name="biografia" id="biografia" value="{{ $perfil->biogradia }}">
                     <trix-editor 
                         class="form-control @error('biografia') is-invalid @enderror"
                         input="biografia"></trix-editor>
@@ -91,6 +96,10 @@
                         </span>               
                     @enderror
                 @endif
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Actualizar perfil">
                 </div>
 
             </form>
