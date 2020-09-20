@@ -48,6 +48,13 @@ class PerfilController extends Controller
 
         //Si el usuarios sube una imagen
 
+        //Asignar nombre y URL
+        auth()->user()->url = $data['url'];
+        auth()->user()->name = $data['nombre'];
+        auth()->user()->save();
+
+        // Asignar biografia e iamgen
+
         //Guardar información
 
         //Redireccionar
