@@ -1,30 +1,30 @@
 @extends('layouts.app')
 
 @section('styles')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.3/trix.min.css" integrity="sha512-sC2S9lQxuqpjeJeom8VeDu/jUJrVfJM7pJJVuH9bqrZZYqGe7VhTASUb3doXVk6WtjD0O4DTS+xBx2Zpr1vRvg==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.css" integrity="sha256-yebzx8LjuetQ3l4hhQ5eNaOxVLgqaY1y8JcrXuJrAOg=" crossorigin="anonymous" />
 @endsection
 
 @section('botones')
-
-<a href="{{ route('recetas.index') }}"class="btn btn-primary mr-2 text-white">Volver</a>
-
-</div>
-
+    <a href="{{ route('recetas.index') }}" class="btn btn-outline-primary mr-2 text-uppercase font-weight-bold">
+        <svg class="icono" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"></path></svg>
+        Volver
+    </a>
 @endsection
 
 @section('content')
-
     <h2 class="text-center mb-5">Crear Nueva Receta</h2>
+
 
     <div class="row justify-content-center mt-5">
         <div class="col-md-8">
-        <form method="post" action="{{route('recetas.store')}}" enctype="multipart/form-data" novalidate>
+            <form method="POST" action="{{ route('recetas.store') }}" enctype="multipart/form-data" novalidate>
                 @csrf
                 <div class="form-group">
                     <label for="titulo">Titulo Receta</label>
-                    <input type="text" 
-                        name="titulo" 
-                        class="form-control @error('titulo') is-invalid @enderror"
+
+                    <input type="text"
+                        name="titulo"
+                        class="form-control @error('titulo') is-invalid @enderror "
                         id="titulo"
                         placeholder="Titulo Receta"
                         value={{ old('titulo') }}
@@ -32,89 +32,93 @@
 
                     @error('titulo')
                         <span class="invalid-feedback d-block" role="alert">
-                        <strong>{{$message}}</strong>
+                            <strong>{{$message}}</strong>
                         </span>
                     @enderror
                 </div>
 
-                <div class="form-group">
-                    <label for="categorias">Categorías</label>
+                <div class="from-group">
+                    <label for="categoria">Categoria</label>
 
-                    <select 
-                        name="categoria" 
-                        class="form-control @error('categoria') is-invalid @enderror"
+                    <select
+                        name="categoria"
+                        class="form-control @error('categoria') is-invalid @enderror "
                         id="categoria"
                     >
-                        
-                        <option value="">-- Seleccione --</option>
-                        @foreach($categorias as $categoria)
+                        <option value="">-- Seleccione -</option>
+                        @foreach ($categorias as $categoria)
                             <option 
                                 value="{{ $categoria->id }}" 
-                                {{ old('categoria') == $categoria->id ? 'selected' : '' }}
-                                >{{ $categoria->nombre }}
-                            </option>
+                                {{ old('categoria') == $categoria->id ? 'selected' : '' }} 
+                            >{{$categoria->nombre}}</option>
                         @endforeach
                     </select>
 
                     @error('categoria')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{$message}}</strong>
-                        </span>               
+                        </span>
                     @enderror
-
                 </div>
 
                 <div class="form-group mt-3">
                     <label for="preparacion">Preparación</label>
-                    <input type="hidden" name="preparacion" id="preparacion" value="{{ old('preparacion') }}">
+                    <input id="preparacion" type="hidden" name="preparacion" value="{{ old('preparacion') }}">
                     <trix-editor 
-                        class="form-control @error('preparacion') is-invalid @enderror"
-                        input="preparacion"></trix-editor>
+                        class="form-control @error('preparacion') is-invalid @enderror "
+                        input="preparacion"
+                    ></trix-editor>
+
                     @error('preparacion')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{$message}}</strong>
-                        </span>               
+                        </span>
                     @enderror
                 </div>
-                
+
                 <div class="form-group mt-3">
                     <label for="ingredientes">Ingredientes</label>
-                    <input type="hidden" name="ingredientes" id="ingredientes" value="{{ old('ingredientes') }}">
-                    <trix-editor
-                        class="form-control @error('ingredientes') is-invalid @enderror" 
+                    <input id="ingredientes" type="hidden" name="ingredientes" value="{{ old('ingredientes') }}">
+                    <trix-editor 
+                        class="form-control @error('ingredientes') is-invalid @enderror "
                         input="ingredientes"></trix-editor>
+
                     @error('ingredientes')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{$message}}</strong>
-                        </span>               
+                        </span>
                     @enderror
                 </div>
 
                 <div class="form-group mt-3">
                     <label for="imagen">Elige la imagen</label>
+
                     <input 
-                        class="form-control @error('imagen') is-invalid @enderror"
+                        id="imagen" 
                         type="file" 
-                        name="imagen" 
-                        id="imagen"
+                        class="form-control @error('imagen') is-invalid @enderror"
+                        name="imagen"
                     >
+
                     @error('imagen')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{$message}}</strong>
-                        </span>               
+                        </span>
                     @enderror
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Agregar Receta">
+                    <input type="submit" class="btn btn-primary" value="Agregar Receta" >
                 </div>
 
             </form>
         </div>
     </div>
 
+
 @endsection
 
+
 @section('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.3/trix.min.js" integrity="sha512-NbOGGQbYcLSXiUfXtAgJry0RVLJINgm0f5nYcjfc/peKfDqxSc8bIXBEKpbty7DC/IWykVLpgeEgm7ijRa1cMw==" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.js" integrity="sha256-2D+ZJyeHHlEMmtuQTVtXt1gl0zRLKr51OCxyFfmFIBM=" crossorigin="anonymous" defer></script>
 @endsection

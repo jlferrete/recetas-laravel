@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'url',
+        'name', 'email', 'password', 'url'
     ];
 
     /**
@@ -37,28 +37,35 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /** Evento que se ejecuta cuando un usuario es creado */
-
+    // Evento que se ejecuta cuando un usuario es creado
     protected static function boot()
     {
         parent::boot();
 
-        //Asignar perfil una vez se haya creado un usuario nuevo
+        // Asignar perfil una vez se haya creado un usuario nuevo
         static::created(function ($user) {
             $user->perfil()->create();
         });
     }
 
 
-    /** Relacion de 1:N de Usuario a Recetas  **/
+
+    /** Relación 1:n de Usuario a Recetas */
     public function recetas()
     {
         return $this->hasMany(Receta::class);
     }
 
-    /** Relacion de 1:1 de Usuario a Perfil **/
+    // Relación 1:1 de usuario y perfil
     public function perfil()
     {
         return $this->hasOne(Perfil::class);
     }
+
+    // Recetas que el usuario le ha dado me gusta
+    public function meGusta()
+    {
+        return $this->belongsToMany(Receta::class, 'likes_receta');
+    }
+
 }

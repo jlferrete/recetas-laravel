@@ -1,5 +1,5 @@
 <template>
-    <span>{{ formatearFecha }}</span>
+    <span >{{ formatearFecha }} </span>
 </template>
 
 <script>
